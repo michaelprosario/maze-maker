@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'edit-maze',
     loadChildren: () => import('./edit-maze/edit-maze.module').then( m => m.EditMazePageModule)
   },
+  {
+    path: 'add-maze',
+    loadChildren: () => import('./edit-maze/edit-maze.module').then( m => m.EditMazePageModule)
+  },  
 ];
 
 @NgModule({

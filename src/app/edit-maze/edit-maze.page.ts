@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Maze } from '../core/entity/maze';
 
 @Component({
   selector: 'app-edit-maze',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditMazePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {     
 
-  ngOnInit() {
+  }
+
+  ngOnInit() 
+  {
+    // Are we doing add or update?
+    let creatingNew = this.router.url.indexOf("add-maze") > 0;
+    if(creatingNew)
+    {
+      alert("create new")
+
+    }else{
+      alert("update")
+    }
+
   }
 
 }

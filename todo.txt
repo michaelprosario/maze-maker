@@ -1,6 +1,7 @@
-- add new maze button
+x- add new maze button
+x- create edit-maze
+
 - create maze entity
-- create edit-maze
 - setup CRUD
 
 
