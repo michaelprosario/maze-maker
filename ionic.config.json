@@ -1,0 +1,7 @@
+{
+  "name": "maze-maker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
