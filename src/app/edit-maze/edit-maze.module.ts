@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ViewMessagePage } from './view-message.page';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewMessagePageRoutingModule } from './view-message-routing.module';
+import { EditMazePageRoutingModule } from './edit-maze-routing.module';
+
+import { EditMazePage } from './edit-maze.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewMessagePageRoutingModule
+    EditMazePageRoutingModule
   ],
-  declarations: [ViewMessagePage]
+  declarations: [EditMazePage]
 })
-export class ViewMessagePageModule {}
+export class EditMazePageModule {}
