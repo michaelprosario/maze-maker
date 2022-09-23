@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'add-maze',
     loadChildren: () => import('./edit-maze/edit-maze.module').then( m => m.EditMazePageModule)
-  },  
+  },   {
+    path: 'view-maze',
+    loadChildren: () => import('./view-maze/view-maze.module').then( m => m.ViewMazePageModule)
+  },
+ 
 ];
 
 @NgModule({

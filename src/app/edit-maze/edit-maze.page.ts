@@ -25,7 +25,11 @@ export class EditMazePage implements OnInit {
     }else{
       alert("update")
     }
+  }
 
+  onViewInAr()
+  {
+    this.router.navigate(['/view-maze']);
   }
 
 }
