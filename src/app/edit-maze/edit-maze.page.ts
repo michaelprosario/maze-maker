@@ -9,18 +9,19 @@ import { Maze } from '../core/entity/maze';
 })
 export class EditMazePage implements OnInit {
 
+  maze: Maze;
   constructor(private router: Router) {     
 
   }
 
   ngOnInit() 
   {
+    this.maze = new Maze();
     // Are we doing add or update?
     let creatingNew = this.router.url.indexOf("add-maze") > 0;
     if(creatingNew)
     {
       alert("create new")
-
     }else{
       alert("update")
     }
