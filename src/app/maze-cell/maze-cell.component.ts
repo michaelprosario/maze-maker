@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Maze } from '../core/entity/maze';
 import { MazeService } from '../core/services/maze-service';
 
 @Component({
@@ -32,8 +31,7 @@ export class MazeCellComponent implements OnInit {
     }
 
     this.backgroundColor = this.colors[this.cellValue];
-    debugger;
-    this.mazeService.setCell(this.row, this.column, this.cellValue);
+    this.mazeService.setCell(this.row-1, this.column-1, this.cellValue);
   }
 
 }

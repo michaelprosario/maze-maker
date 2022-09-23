@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('render-maze', {
+        init: function () 
+        {
+          var sceneEl = document.querySelector('a-scene');
+          let mazeString = localStorage.getItem("maze");
+          let mazeGrid = JSON.parse(mazeString);
+          let boxSize = 0.5;
+          for(let row=0; row<mazeGrid.length; row++)
+          {
+            for(let col=0; col<mazeGrid.length; col++)
+            {
+              let cell = mazeGrid[row][col];
+              if(cell > 0)
+              {                
+                var aBox = document.createElement('a-box');
+                let x = boxSize * col;
+                let z = boxSize * row;
+                let height = boxSize * cell;
+                let y = ((cell - 1)*boxSize) / 2;
+                aBox.setAttribute("position", x + " "+ y +" " + z);
+                aBox.setAttribute("scale", boxSize + " " + height + " " + boxSize);
+                sceneEl.appendChild(aBox);
+              }
+            }
+          }
+        }
+      });        
+    </script>  
+  </head>
+  <body>
+    <a-scene>
+      <a-entity render-maze></a-entity>
+    </a-scene>
+  </body>
+</html>

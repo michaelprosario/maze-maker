@@ -6,6 +6,10 @@ export class MazeService
 {
     maze: Maze;
 
+    clearMaze() {
+        this.maze = new Maze();
+    }
+    
     constructor()
     {
         this.maze = new Maze();
@@ -14,6 +18,10 @@ export class MazeService
     setCell(row:number, col: number, value: number)
     {
         this.maze.setCell(row, col, value);
-        console.log(this.maze.grid);
     }
+
+    storeMazeInLocalStorage() {
+        localStorage.setItem('maze', JSON.stringify(this.maze.grid));
+    }
+  
 }

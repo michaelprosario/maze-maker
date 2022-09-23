@@ -8,6 +8,7 @@ import { EditMazePageRoutingModule } from './edit-maze-routing.module';
 
 import { EditMazePage } from './edit-maze.page';
 import { MazeCellComponent } from '../maze-cell/maze-cell.component';
+import { MazeService } from '../core/services/maze-service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,8 @@ import { MazeCellComponent } from '../maze-cell/maze-cell.component';
     IonicModule,
     EditMazePageRoutingModule, 
   ],
-  declarations: [EditMazePage, MazeCellComponent]
+  declarations: [EditMazePage, MazeCellComponent],
+  providers: [MazeService],
+
 })
 export class EditMazePageModule {}
