@@ -1,6 +1,7 @@
 export class Maze
 {
   name: string = "";
+  gridSize: number = 10;
 
   grid: Array<Array<number>> = [];
 
@@ -8,10 +9,15 @@ export class Maze
     this.setupMaze();
   }
 
+  setCell(row:number, col: number, value: number)
+  {
+    this.grid[row][col] = value;
+  }
+
   setupMaze()
   {
     this.grid = [];
-    let size = 16;
+    let size = this.gridSize;
     let rowIndex =0;
     for(rowIndex=0; rowIndex<size; rowIndex++)
     {
@@ -23,7 +29,5 @@ export class Maze
         this.grid[rowIndex][colIndex] = 0;
       }
     }
-
-    console.log(this.grid);
   }
 }
