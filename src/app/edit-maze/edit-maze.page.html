@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content>
-<div>
-  <app-maze-cell [maze]="maze"></app-maze-cell>
+<div *ngFor="let row of maze.grid; index as rowIndex" class="divRow">
+  <div *ngFor="let col of maze.grid[rowIndex]; index as colIndex">
+    <app-maze-cell [maze]="maze"></app-maze-cell>
+  </div>
 </div>
+
 </ion-content>

@@ -11,7 +11,7 @@ export class Maze
   setupMaze()
   {
     this.grid = [];
-    let size = 32;
+    let size = 16;
     let rowIndex =0;
     for(rowIndex=0; rowIndex<size; rowIndex++)
     {
