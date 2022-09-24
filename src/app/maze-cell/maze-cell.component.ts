@@ -8,21 +8,16 @@ import { MazeService } from '../core/services/maze-service';
 })
 export class MazeCellComponent implements OnInit {
 
-  @Input()
-  row: number = 0;
-  @Input()
-  column: number = 0;
+  @Input() row: number = 0;
+  @Input() column: number = 0;
 
-
-  cellValue: number = 0;
   backgroundColor: string = 'black';
+  cellValue: number = 0;
   colors: Array<string> = ['black', '#FA8334', '#FFFD77', '#FFE882', '#388697','#271033'];
 
   constructor(private mazeService: MazeService) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onCellClick(){
     this.cellValue++;

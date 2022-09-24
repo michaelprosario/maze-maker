@@ -6,14 +6,14 @@
 
 <ion-content>
 
-<div *ngFor="let row of maze.grid; let rowIndex = index" class="divRow">
-  <div *ngFor="let col of maze.grid[rowIndex]; let colIndex = index">
-    <app-maze-cell 
-      [row]="rowIndex" 
-      [column]="colIndex">
-    </app-maze-cell>
+
+<div *ngFor="let row of list" class="divRow">
+  <div *ngFor="let col of list">
+    <app-maze-cell [row]="row" [column]="col"></app-maze-cell>
   </div>
 </div>
+
+
 <div>
   <ion-button (click)="onViewInAr()">View in AR</ion-button>
 </div>

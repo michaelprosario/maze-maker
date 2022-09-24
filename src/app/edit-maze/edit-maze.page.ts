@@ -11,8 +11,12 @@ import { MazeService } from '../core/services/maze-service';
 export class EditMazePage implements OnInit {
 
   maze: Maze;
-  constructor(private router: Router,private mazeService: MazeService) {     
-
+  list: Array<number>;
+  constructor(private router: Router,private mazeService: MazeService) {    
+    this.list = [];
+    for(let i=0; i<10; i++){
+      this.list.push(i);
+    } 
   }
 
   ngOnInit() 
