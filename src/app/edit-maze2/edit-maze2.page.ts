@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MazeService } from '../core/services/maze-service';
+import { db, MazeItem } from '../db';
 
 @Component({
   selector: 'app-edit-maze2',
@@ -79,6 +80,22 @@ export class EditMaze2Page implements OnInit {
     
     this.mazeService.setCell(row,col,cellValue);    
     event.srcElement.style.background = this.colors[cellValue];
+  }
+
+  async onSaveMaze()
+  {
+    // create maze item
+    let json = JSON.stringify(this.mazeService.maze);
+    let mazeItem = {
+      name: this.mazeName,
+      mazeContent: json
+    } as MazeItem
+
+    // store to the database
+    await db.mazes.add(mazeItem);
+
+    // route user to home
+    this.router.navigate(['/']);
   }
 
 }
