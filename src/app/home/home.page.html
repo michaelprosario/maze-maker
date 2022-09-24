@@ -11,13 +11,16 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-        Inbox
+        My Mazes
       </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-button (click)="onAddMaze()">Add maze</ion-button>
   <ion-list>
-
-
+    <ng-template ngFor let-item [ngForOf]="mazeItems">
+      <ion-item (click)="onItemSelect(item)">
+        <ion-label>{{ item.name }}</ion-label>
+      </ion-item>
+    </ng-template>
   </ion-list>
 </ion-content>

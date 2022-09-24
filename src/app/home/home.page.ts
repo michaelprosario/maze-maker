@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { db, MazeItem } from '../db';
+import { liveQuery } from 'dexie';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private router: Router) {}
+ 
+  mazeItems: Array<MazeItem>;
+  constructor(private router: Router) {
 
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
+  }
+
+  async ngOnInit() 
+  {
+    this.mazeItems = await db.mazes.toArray();    
+  }
+
+  onItemSelect(item: MazeItem)
+  {
+    this.router.navigate(['/edit-maze/' + item.id]);
   }
 
   onAddMaze(){

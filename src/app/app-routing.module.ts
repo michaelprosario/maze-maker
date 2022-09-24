@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'add-maze',
     loadChildren: () => import('./edit-maze2/edit-maze2.module').then( m => m.EditMaze2PageModule)
   },
+  {
+    path: 'edit-maze/:id',
+    loadChildren: () => import('./edit-maze2/edit-maze2.module').then( m => m.EditMaze2PageModule)
+  },  
  
 ];
 

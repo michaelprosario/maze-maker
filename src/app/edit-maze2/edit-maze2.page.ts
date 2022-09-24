@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Maze } from '../core/entity/maze';
 import { MazeService } from '../core/services/maze-service';
 import { db, MazeItem } from '../db';
 
@@ -17,6 +18,7 @@ export class EditMaze2Page implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private mazeService: MazeService
   ) 
   {    
@@ -26,7 +28,7 @@ export class EditMaze2Page implements OnInit {
     } 
   }
 
-  ngOnInit() 
+  async ngOnInit() 
   {
     this.grid = this.mazeService.maze.grid;
     // Are we doing add or update?
@@ -40,6 +42,27 @@ export class EditMaze2Page implements OnInit {
         day: '2-digit',
       })
     }else{
+      // get id from url
+      let recordId = parseInt(this.route.snapshot.paramMap.get('id'));
+
+
+      // get the record from index db
+      let mazeItem = await db.mazes.get(recordId);
+      
+      // load the maze
+      let mazeStuff = JSON.parse(mazeItem.mazeContent) as Maze;
+      let maze = new Maze();
+      maze.name = maze.name = mazeItem.name;
+      maze.grid = mazeStuff.grid;
+      maze.gridSize = mazeStuff.gridSize;
+      
+      this.mazeService.maze = maze;
+
+      // set the grid
+      this.grid = maze.grid;
+
+      // set the name
+      this.mazeName = mazeItem.name;
     }
   }
 
@@ -95,6 +118,10 @@ export class EditMaze2Page implements OnInit {
     await db.mazes.add(mazeItem);
 
     // route user to home
+    this.router.navigate(['/']);
+  }
+
+  onClose(){
     this.router.navigate(['/']);
   }
 
