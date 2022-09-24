@@ -12,6 +12,7 @@ export class EditMaze2Page implements OnInit {
   colors: Array<string> = ['black', '#065143', '#129490', '#70b77e', '#e0a890','#ce1483'];
   grid: Array<Array<number>>
   list: Array<number>;
+  mazeName: string = "foo";
 
   constructor(
     private router: Router,
@@ -31,6 +32,12 @@ export class EditMaze2Page implements OnInit {
     let creatingNew = this.router.url.indexOf("add-maze") > 0;
     if(creatingNew)
     {
+      let date = new Date();
+      this.mazeName = "Maze " + date.toLocaleDateString([], {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
     }else{
     }
   }
@@ -42,6 +49,11 @@ export class EditMaze2Page implements OnInit {
   }
 
   onClearMaze(){
+    if(!confirm("Are you sure you want to clear the maze? Press OK to proceed."))
+    {
+      return;
+    }
+
     this.mazeService.clearMaze();
     this.grid = this.mazeService.maze.grid;
 
