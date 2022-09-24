@@ -1,32 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-maze2</ion-title>
+    <ion-title>Edit Maze</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <table id="tblMaze">    
-      <tr *ngFor="let row of list" class="divRow">        
-          <td *ngFor="let col of list" class="tdCell" (click)="onCellClick($event,row,col)">
-            {{ grid[row][col] }}            
-          </td>        
-      </tr>    
-  </table>
   <ion-item>
     <ion-label>Name</ion-label>
     <ion-input [(ngModel)]="mazeName"></ion-input>
   </ion-item>
 
+  <table id="tblMaze">    
+      <tr *ngFor="let row of list" class="divRow" >        
+          <td *ngFor="let col of list" 
+              class="tdCell" (click)="onCellClick($event,row,col)" 
+              [style.background-color]="getCellColor(grid[row][col])"
+              >
+            {{ grid[row][col] }}            
+          </td>        
+      </tr>    
+  </table>
+
+
   <div>
-    <ion-button (click)="onViewInAr()">View in AR</ion-button>
+    <ion-button (click)="onViewInAr()" expand="block">View in AR</ion-button>
   </div>
   <div>
-    <ion-button (click)="onClearMaze()">Clear Maze</ion-button>
+    <ion-button (click)="onClearMaze()" expand="block">Clear Maze</ion-button>
   </div>
   <div>
-    <ion-button (click)="onSaveMaze()">Save Maze</ion-button>
+    <ion-button (click)="onSaveMaze()" expand="block">Save Maze</ion-button>
   </div>  
   <div>
-    <ion-button (click)="onClose()">Close</ion-button>
+    <ion-button (click)="onClose()" expand="block">Close</ion-button>
   </div>  
+  <div>
+    <ion-button (click)="onDelete()" expand="block">Delete</ion-button>
+  </div>    
 </ion-content>

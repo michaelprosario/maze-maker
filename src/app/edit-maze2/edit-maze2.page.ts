@@ -11,10 +11,12 @@ import { db, MazeItem } from '../db';
 })
 export class EditMaze2Page implements OnInit {
 
+
   colors: Array<string> = ['black', '#065143', '#129490', '#70b77e', '#e0a890','#ce1483'];
   grid: Array<Array<number>>
   list: Array<number>;
   mazeName: string = "foo";
+  recordId: number;
 
   constructor(
     private router: Router,
@@ -35,35 +37,60 @@ export class EditMaze2Page implements OnInit {
     let creatingNew = this.router.url.indexOf("add-maze") > 0;
     if(creatingNew)
     {
-      let date = new Date();
-      this.mazeName = "Maze " + date.toLocaleDateString([], {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      })
+      this.setupNewRecord();
     }else{
-      // get id from url
-      let recordId = parseInt(this.route.snapshot.paramMap.get('id'));
-
-
-      // get the record from index db
-      let mazeItem = await db.mazes.get(recordId);
       
-      // load the maze
-      let mazeStuff = JSON.parse(mazeItem.mazeContent) as Maze;
-      let maze = new Maze();
-      maze.name = maze.name = mazeItem.name;
-      maze.grid = mazeStuff.grid;
-      maze.gridSize = mazeStuff.gridSize;
-      
-      this.mazeService.maze = maze;
-
-      // set the grid
-      this.grid = maze.grid;
-
-      // set the name
-      this.mazeName = mazeItem.name;
+      let recordId = parseInt(this.route.snapshot.paramMap.get('id'));      
+      await this.loadExistingRecord(recordId);
     }
+  }
+
+  private async loadExistingRecord(recordId: number) {
+    let mazeItem = await db.mazes.get(recordId);
+
+    // load the maze
+    let mazeStuff = JSON.parse(mazeItem.mazeContent) as Maze;
+    let maze = this.makeMaze(mazeItem, mazeStuff);
+
+    // restore maze on the service
+    this.mazeService.maze = maze;
+
+    // set the grid
+    this.grid = maze.grid;
+
+    // set the name
+    this.mazeName = mazeItem.name;
+
+    // restore record id
+    this.recordId = mazeItem.id; 
+  }
+
+  private setupNewRecord() {
+    let date = new Date();
+    this.mazeName = "Maze " + date.toLocaleDateString([], {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
+    this.recordId = 0;
+
+    // clear the maze with no confirm...
+    this.mazeService.clearMaze();
+    this.grid = this.mazeService.maze.grid;
+  }
+
+  private makeMaze(mazeItem: MazeItem, mazeStuff: Maze) {
+    let maze = new Maze();
+    maze.name = maze.name = mazeItem.name;
+    maze.grid = mazeStuff.grid;
+    maze.gridSize = mazeStuff.gridSize;
+    return maze;
+  }
+
+  getCellColor(cellValue: number)
+  {
+    return this.colors[cellValue];
   }
 
   onViewInAr()
@@ -79,17 +106,16 @@ export class EditMaze2Page implements OnInit {
     }
 
     this.mazeService.clearMaze();
-    this.grid = this.mazeService.maze.grid;
-
-    let tblMaze = document.getElementById("tblMaze");
-    // @ts-ignore
-    for(let tr of tblMaze.children)
-    {
-      for(let td of tr.children){
-        td.style.background = 'black';
-      }
-    }    
+    this.grid = this.mazeService.maze.grid; 
   }
+
+  onDelete() {
+    if(!confirm("Press OK to delete record")){
+      return;
+    }
+    db.mazes.delete(this.recordId);
+    this.onClose();
+  }  
 
   onCellClick(event: any,row: number,col: number){
     let cellValue = this.mazeService.maze.getCell(row,col)
@@ -107,7 +133,7 @@ export class EditMaze2Page implements OnInit {
 
   async onSaveMaze()
   {
-    // create maze item
+    // create maze item    
     let json = JSON.stringify(this.mazeService.maze);
     let mazeItem = {
       name: this.mazeName,
@@ -115,7 +141,15 @@ export class EditMaze2Page implements OnInit {
     } as MazeItem
 
     // store to the database
-    await db.mazes.add(mazeItem);
+    if(this.recordId === 0)
+    {
+      await db.mazes.add(mazeItem);
+    }
+    else
+    {
+      mazeItem.id = this.recordId;
+      await db.mazes.update(this.recordId, mazeItem);
+    }    
 
     // route user to home
     this.router.navigate(['/']);
