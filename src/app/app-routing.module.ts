@@ -12,15 +12,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'edit-maze',
-    loadChildren: () => import('./edit-maze/edit-maze.module').then( m => m.EditMazePageModule)
+    path: 'view-maze',
+    loadChildren: () => import('./view-maze/view-maze.module').then( m => m.ViewMazePageModule)
   },
   {
     path: 'add-maze',
-    loadChildren: () => import('./edit-maze/edit-maze.module').then( m => m.EditMazePageModule)
-  },   {
-    path: 'view-maze',
-    loadChildren: () => import('./view-maze/view-maze.module').then( m => m.ViewMazePageModule)
+    loadChildren: () => import('./edit-maze2/edit-maze2.module').then( m => m.EditMaze2PageModule)
   },
  
 ];

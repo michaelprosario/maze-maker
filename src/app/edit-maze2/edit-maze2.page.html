@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>edit-maze2</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <table id="tblMaze">    
+      <tr *ngFor="let row of list" class="divRow">        
+          <td *ngFor="let col of list" class="tdCell" (click)="onCellClick($event,row,col)">
+            {{ grid[row][col] }}            
+          </td>        
+      </tr>    
+  </table>
+
+  <div>
+    <ion-button (click)="onViewInAr()">View in AR</ion-button>
+  </div>
+  <div>
+    <ion-button (click)="onClearMaze()">Clear Maze</ion-button>
+  </div>
+</ion-content>

@@ -9,6 +9,11 @@ export class Maze
     this.setupMaze();
   }
 
+  getCell(row:number, col: number)
+  {
+    return this.grid[row][col];
+  }
+
   setCell(row:number, col: number, value: number)
   {
     this.grid[row][col] = value;
