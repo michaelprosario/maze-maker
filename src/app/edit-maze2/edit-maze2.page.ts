@@ -48,20 +48,12 @@ export class EditMaze2Page implements OnInit {
   private async loadExistingRecord(recordId: number) {
     let mazeItem = await db.mazes.get(recordId);
 
-    // load the maze
-    let mazeStuff = JSON.parse(mazeItem.mazeContent) as Maze;
-    let maze = this.makeMaze(mazeItem, mazeStuff);
+    let mazeData = JSON.parse(mazeItem.mazeContent) as Maze;
+    let maze = this.makeMaze(mazeItem, mazeData);
 
-    // restore maze on the service
     this.mazeService.maze = maze;
-
-    // set the grid
     this.grid = maze.grid;
-
-    // set the name
     this.mazeName = mazeItem.name;
-
-    // restore record id
     this.recordId = mazeItem.id; 
   }
 
@@ -119,13 +111,10 @@ export class EditMaze2Page implements OnInit {
 
   onCellClick(event: any,row: number,col: number){
     let cellValue = this.mazeService.maze.getCell(row,col)
-
     cellValue = cellValue + 1;
 
     if(cellValue > 5)
-    {
       cellValue = 0;
-    }
     
     this.mazeService.setCell(row,col,cellValue);    
     event.srcElement.style.background = this.colors[cellValue];
@@ -135,12 +124,7 @@ export class EditMaze2Page implements OnInit {
   {
     // create maze item    
     let json = JSON.stringify(this.mazeService.maze);
-    let mazeItem = {
-      name: this.mazeName,
-      mazeContent: json
-    } as MazeItem
-
-    // store to the database
+    let mazeItem = { name: this.mazeName,mazeContent: json } as MazeItem
     if(this.recordId === 0)
     {
       await db.mazes.add(mazeItem);

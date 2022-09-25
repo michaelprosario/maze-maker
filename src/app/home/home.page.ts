@@ -10,18 +10,11 @@ import { liveQuery } from 'dexie';
 })
 export class HomePage {
  
-  items$ = liveQuery(
-    async () => await db.mazes.toArray()
-  ); 
+  items$ = liveQuery(async () => await db.mazes.toArray()); 
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
 
-  }
-
-  async ngOnInit() 
-  {      
-
-  }
+  async ngOnInit() {}
 
   onItemSelect(item: MazeItem)
   {
