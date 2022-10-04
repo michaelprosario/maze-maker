@@ -20,9 +20,25 @@ const routes: Routes = [
     loadChildren: () => import('./edit-maze2/edit-maze2.module').then( m => m.EditMaze2PageModule)
   },
   {
+    path: 'add-pix',
+    loadChildren: () => import('./edit-pix/edit-pix.module').then( m => m.EditPixPageModule)
+  },  
+  {
     path: 'edit-maze/:id',
     loadChildren: () => import('./edit-maze2/edit-maze2.module').then( m => m.EditMaze2PageModule)
-  },  
+  },   {
+    path: 'list-pix',
+    loadChildren: () => import('./list-pix/list-pix.module').then( m => m.ListPixPageModule)
+  },
+  {
+    path: 'edit-pix',
+    loadChildren: () => import('./edit-pix/edit-pix.module').then( m => m.EditPixPageModule)
+  },
+  {
+    path: 'list-mazes',
+    loadChildren: () => import('./list-mazes/list-mazes.module').then( m => m.ListMazesPageModule)
+  },
+ 
  
 ];
 

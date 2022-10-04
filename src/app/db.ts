@@ -6,14 +6,22 @@ export interface MazeItem {
     mazeContent: string;
 }
 
+export interface PixItem {
+  id?: number;    
+  name: string;
+  pixContent: string;
+}
+
 export class AppDB extends Dexie {
     
     mazes!: Table<MazeItem, number>;
+    pixItems!: Table<PixItem, number>;
   
     constructor() {
       super('ngdexieliveQuery');
       this.version(3).stores({
-        mazes: '++id'
+        mazes: '++id',
+        pixItems: '++id'
       });      
     }
 }

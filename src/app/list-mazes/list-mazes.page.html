@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>My Mazes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">My Mazes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-button (click)="onAddMaze()">Add maze</ion-button>
+  <ion-list>
+    <ng-template ngFor let-item [ngForOf]="items$ | async">
+      <ion-item (click)="onItemSelect(item)">
+        <ion-label>{{ item.name }}</ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-list>
+  
+</ion-content>
