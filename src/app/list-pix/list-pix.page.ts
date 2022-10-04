@@ -24,4 +24,7 @@ export class ListPixPage implements OnInit {
   onAdd(){
     this.router.navigate(['/add-pix']);
   }
+  onHome(){
+    this.router.navigate(['/']);
+  }  
 }

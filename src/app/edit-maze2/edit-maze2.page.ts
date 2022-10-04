@@ -136,11 +136,11 @@ export class EditMaze2Page implements OnInit {
     }    
 
     // route user to home
-    this.router.navigate(['/']);
+    this.router.navigate(['/list-mazes']);
   }
 
   onClose(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/list-mazes']);
   }
 
 }

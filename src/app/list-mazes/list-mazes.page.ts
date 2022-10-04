@@ -25,4 +25,8 @@ export class ListMazesPage {
     this.router.navigate(['/add-maze']);
   }
 
+  onHome(){
+    this.router.navigate(['/']);
+  }  
+
 }

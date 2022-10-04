@@ -12,6 +12,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-button (click)="onAddMaze()">Add maze</ion-button>
+  <ion-button (click)="onHome()">Home</ion-button>
   <ion-list>
     <ng-template ngFor let-item [ngForOf]="items$ | async">
       <ion-item (click)="onItemSelect(item)">

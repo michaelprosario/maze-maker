@@ -31,12 +31,16 @@ const routes: Routes = [
     loadChildren: () => import('./list-pix/list-pix.module').then( m => m.ListPixPageModule)
   },
   {
-    path: 'edit-pix',
+    path: 'edit-pix/:id',
     loadChildren: () => import('./edit-pix/edit-pix.module').then( m => m.EditPixPageModule)
   },
   {
     path: 'list-mazes',
     loadChildren: () => import('./list-mazes/list-mazes.module').then( m => m.ListMazesPageModule)
+  },
+  {
+    path: 'view-pix',
+    loadChildren: () => import('./view-pix/view-pix.module').then( m => m.ViewPixPageModule)
   },
  
  

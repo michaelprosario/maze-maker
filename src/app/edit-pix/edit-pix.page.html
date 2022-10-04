@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-pix</ion-title>
+    <ion-title>Edit Pix</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input [(ngModel)]="name"></ion-input>
+  </ion-item>
 
+  <table id="tblPix">    
+      <tr *ngFor="let row of list" class="divRow" >        
+          <td *ngFor="let col of list" 
+              class="tdCell" (click)="onCellClick($event,row,col)" 
+              [style.background-color]="getCellColor(grid[row][col])"
+              >
+            {{ grid[row][col] }}            
+          </td>        
+      </tr>    
+  </table>
+
+
+  <div>
+    <ion-button (click)="onViewInAr()" expand="block">AR View</ion-button>
+  </div>
+  <div>
+    <ion-button (click)="onClear()" expand="block">Clear</ion-button>
+  </div>
+  <div>
+    <ion-button (click)="onSave()" expand="block">Save</ion-button>
+  </div>  
+  <div>
+    <ion-button (click)="onClose()" expand="block">Close</ion-button>
+  </div>  
+  <div>
+    <ion-button (click)="onDelete()" expand="block">Delete</ion-button>
+  </div>    
 </ion-content>
